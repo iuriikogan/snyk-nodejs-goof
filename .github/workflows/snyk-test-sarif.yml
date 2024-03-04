@@ -6,6 +6,7 @@ jobs:
     steps:
       - uses: snyk/actions/node@master
       - name: Snyk Test
+        run: snyk auth ${{ secrets.SNYK_TOKEN}}
         run: snyk test --sarif-file-output=snyk-sarif1.json
         continue-on-error: true
         env:
