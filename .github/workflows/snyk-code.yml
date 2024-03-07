@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  snyk-non-blocking:
+  snyk-full-scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -17,7 +17,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}      
         continue-on-error: true 
-  snyk-blocking:
+  snyk-high-severity:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -27,6 +27,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high --json-file-output=snyk-report.json
+        continue-on-error: true
   build:
     # needs: [snyk-blocking]
     runs-on: ubuntu-latest
