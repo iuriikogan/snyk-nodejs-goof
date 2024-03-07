@@ -26,10 +26,9 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high
-        continue-on-error: true
+          args: --severity-threshold=critical
   build:
-    # needs: [snyk-blocking]
+    needs: [snyk-high-severity]
     runs-on: ubuntu-latest
     steps:
       -
